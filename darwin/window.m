@@ -357,6 +357,12 @@ void uiWindowSetMargined(uiWindow *w, int margined)
 	singleChildConstraintsSetMargined(&(w->constraints), w->margined);
 }
 
+void uiWindowSetAutosave(uiWindow *w, const char *name)
+{
+	[[w->window windowController] setShouldCascadeWindows:NO];
+	[w->window setFrameAutosaveName:toNSString(name)];
+}
+
 static int defaultOnClosing(uiWindow *w, void *data)
 {
 	return 0;
