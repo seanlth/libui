@@ -684,6 +684,8 @@ _UI_EXTERN int uiGridPadded(uiGrid *g);
 _UI_EXTERN void uiGridSetPadded(uiGrid *g, int padded);
 _UI_EXTERN uiGrid *uiNewGrid(void);
 
+#include "./_draw_image/ui.h"
+
 #ifdef __cplusplus
 }
 #endif

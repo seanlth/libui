@@ -1,8 +1,17 @@
+#import "ui.h"
 #import "uipriv_darwin.h"
 
-uiImage *uiNewImage(int w, int h)
+
+// drawimage.m
+struct uiPixmapImage {
+       CGContextRef c;
+       void *bmapdata;
+       int w, h, rowstride;
+};
+
+uiPixmapImage *uiNewPixmapImage(int w, int h)
 {
-	uiImage *img = uiNew(uiImage);
+	uiPixmapImage *img = uiNew(uiPixmapImage);
 
 	/*
 	 * Round up to the nearest multiple of 16 since that's the
@@ -18,7 +27,7 @@ uiImage *uiNewImage(int w, int h)
 	return img;
 }
 
-void uiFreeImage(uiImage *img)
+void uiFreePixmapImage(uiPixmapImage *img)
 {
 	uiFree(img->bmapdata);
 	CGContextRelease(img->c);
@@ -28,7 +37,7 @@ void uiFreeImage(uiImage *img)
 // always little endian ARGB for now.
 static const uiPixmap32Format default_fmt = uiPixmap32FormatHasAlpha | uiPixmap32FormatAlphaPremultiplied | uiPixmap32FormatZeroRowBottom | uiPixmap32FormatOffsets(3, 2, 1, 0);
 
-void uiImageGetData(uiImage *img, uiImageData *id)
+void uiPixmapImageGetData(uiPixmapImage *img, uiImageData *id)
 {
 	id->fmt = default_fmt;
 	id->width = img->w;
@@ -37,7 +46,7 @@ void uiImageGetData(uiImage *img, uiImageData *id)
 	id->data = img->bmapdata;
 }
 
-void uiImageLoadPixmap32Raw(uiImage *img, int x, int y, int width, int height, int rowstrideBytes, uiPixmap32Format fmt, void *data)
+void uiImageLoadPixmap32Raw(uiPixmapImage *img, int x, int y, int width, int height, int rowstrideBytes, uiPixmap32Format fmt, void *data)
 {
 	int dw = img->w;
 	int dh = img->h;
@@ -54,7 +63,7 @@ void uiImageLoadPixmap32Raw(uiImage *img, int x, int y, int width, int height, i
 }
 
 // from draw.m
-void uiDrawImage(uiDrawContext *c, double x, double y, uiImage *img)
+void uiDrawPixmapImage(uiDrawContext *c, double x, double y, uiPixmapImage *img)
 {
        CGContextDrawImage(c->c, CGRectMake(x, y, img->w, img->h), CGBitmapContextCreateImage(img->c));
 }

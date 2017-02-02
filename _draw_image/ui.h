@@ -1,4 +1,5 @@
-#include "../ui.h"
+#ifndef __LIBUI_UI_DRAW_IMAGE_H__
+#define __LIBUI_UI_DRAW_IMAGE_H__
 
 /*
  * uiPixmap32Format encodes how a pixmap is formatted.
@@ -16,7 +17,7 @@ typedef uint32_t uiPixmap32Format;
 #define uiPixmap32FormatAlphaPremultiplied  0x200
 #define uiPixmap32FormatZeroRowBottom   0x400
 
-typedef struct uiImage uiImage;
+typedef struct uiPixmapImage uiPixmapImage;
 typedef struct uiImageData uiImageData;
 // Externally exported information about the image. Obtained with uiImageGetData.
 struct uiImageData {
@@ -26,10 +27,12 @@ struct uiImageData {
   int rowstride;
   void *data;
 };
-_UI_EXTERN uiImage *uiNewImage(int width, int height);
-_UI_EXTERN void uiFreeImage(uiImage *);
-_UI_EXTERN uiPixmap32Format uiImageGetFormat(uiImage *);
-_UI_EXTERN void uiImageGetData(uiImage *, uiImageData *);
-_UI_EXTERN void uiImageLoadPixmap32Raw(uiImage *img, int x, int y, int width, int height, int rowstrideBytes, uiPixmap32Format fmt, void *data);
+_UI_EXTERN uiPixmapImage *uiNewPixmapImage(int width, int height);
+_UI_EXTERN void uiFreePixmapImage(uiPixmapImage *);
+_UI_EXTERN uiPixmap32Format uiPixmapImageGetFormat(uiPixmapImage *);
+_UI_EXTERN void uiPixmapImageGetData(uiPixmapImage *, uiImageData *);
+_UI_EXTERN void uiImageLoadPixmap32Raw(uiPixmapImage *img, int x, int y, int width, int height, int rowstrideBytes, uiPixmap32Format fmt, void *data);
 
-_UI_EXTERN void uiDrawImage(uiDrawContext *c, double x, double y, uiImage *img);
+_UI_EXTERN void uiDrawPixmapImage(uiDrawContext *c, double x, double y, uiPixmapImage *img);
+
+#endif
