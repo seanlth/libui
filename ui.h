@@ -111,6 +111,7 @@ _UI_EXTERN void uiWindowSetBorderless(uiWindow *w, int borderless);
 _UI_EXTERN void uiWindowSetChild(uiWindow *w, uiControl *child);
 _UI_EXTERN int uiWindowMargined(uiWindow *w);
 _UI_EXTERN void uiWindowSetMargined(uiWindow *w, int margined);
+_UI_EXTERN void uiWindowSetAutosave(uiWindow *w, const char *name);
 _UI_EXTERN uiWindow *uiNewWindow(const char *title, int width, int height, int hasMenubar);
 
 typedef struct uiButton uiButton;
@@ -683,6 +684,8 @@ _UI_EXTERN void uiGridInsertAt(uiGrid *g, uiControl *c, uiControl *existing, uiA
 _UI_EXTERN int uiGridPadded(uiGrid *g);
 _UI_EXTERN void uiGridSetPadded(uiGrid *g, int padded);
 _UI_EXTERN uiGrid *uiNewGrid(void);
+
+#include "./_draw_image/ui.h"
 
 #ifdef __cplusplus
 }

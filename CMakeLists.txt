@@ -130,6 +130,8 @@ macro(_target_link_options_private _target)
 	endforeach()
 endmacro()
 
+add_subdirectory("_draw_image")
+
 add_subdirectory("common")
 add_subdirectory("${_OSNAME}")
 add_library(${_LIBUINAME} ${_LIBUI_SOURCES})
