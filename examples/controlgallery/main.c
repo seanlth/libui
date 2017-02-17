@@ -307,6 +307,8 @@ int main(void)
 	mainwin = uiNewWindow("libui Control Gallery", 640, 480, 1);
 	uiWindowOnClosing(mainwin, onClosing, NULL);
 	uiOnShouldQuit(onShouldQuit, mainwin);
+    
+    uiWindowSetBorderless(mainwin, 1);
 
 	tab = uiNewTab();
 	uiWindowSetChild(mainwin, uiControl(tab));

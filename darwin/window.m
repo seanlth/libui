@@ -18,6 +18,7 @@ struct uiWindow {
 	int borderless;
 };
 
+
 @implementation libuiNSWindow
 
 - (void)libui_doMove:(NSEvent *)initialEvent
@@ -118,6 +119,11 @@ struct uiWindow {
 	// this CAN (and IS ALLOWED TO) return NULL, just in case we're called with some OS X-provided window as the key window
 	return v;
 }
+
+// - (bool)isMovableByWindowBackground 
+// {
+//     return true;
+// }
 
 @end
 
@@ -316,6 +322,7 @@ void uiWindowSetBorderless(uiWindow *w, int borderless)
 		// borderless doesn't play nice with fullscreen; wait for later
 		if (!w->fullscreen)
 			[w->window setStyleMask:NSBorderlessWindowMask];
+            w->window.movableByWindowBackground = true;
 	} else {
 		[w->window setStyleMask:defaultStyleMask];
 		// borderless doesn't play nice with fullscreen; restore state
