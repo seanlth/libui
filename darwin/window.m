@@ -261,6 +261,11 @@ void uiWindowSetTitle(uiWindow *w, const char *title)
 	[w->window setTitle:toNSString(title)];
 }
 
+void uiWindowSetBgColour(uiWindow* w, float r, float g, float b, float alpha) 
+{
+    w->window.backgroundColor = [NSColor colorWithSRGBRed:r green:g blue:b alpha:alpha];
+}
+
 void uiWindowContentSize(uiWindow *w, int *width, int *height)
 {
 	NSRect r;

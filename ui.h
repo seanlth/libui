@@ -100,6 +100,7 @@ typedef struct uiWindow uiWindow;
 #define uiWindow(this) ((uiWindow *) (this))
 _UI_EXTERN char *uiWindowTitle(uiWindow *w);
 _UI_EXTERN void uiWindowSetTitle(uiWindow *w, const char *title);
+_UI_EXTERN void uiWindowSetBgColour(uiWindow* w, float r, float g, float b, float alpha);
 _UI_EXTERN void uiWindowContentSize(uiWindow *w, int *width, int *height);
 _UI_EXTERN void uiWindowSetContentSize(uiWindow *w, int width, int height);
 _UI_EXTERN int uiWindowFullscreen(uiWindow *w);
@@ -120,6 +121,7 @@ _UI_EXTERN char *uiButtonText(uiButton *b);
 _UI_EXTERN void uiButtonSetText(uiButton *b, const char *text);
 _UI_EXTERN void uiButtonOnClicked(uiButton *b, void (*f)(uiButton *b, void *data), void *data);
 _UI_EXTERN uiButton *uiNewButton(const char *text);
+_UI_EXTERN uiButton *uiNewButtonWithImage(const char *image_path);
 
 typedef struct uiBox uiBox;
 #define uiBox(this) ((uiBox *) (this))

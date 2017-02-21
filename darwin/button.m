@@ -111,3 +111,32 @@ uiButton *uiNewButton(const char *text)
 
 	return b;
 }
+
+uiButton *uiNewButtonWithImage(const char *image_path)
+{
+	uiButton *b;
+
+	uiDarwinNewControl(uiButton, b);
+
+	b->button = [[NSButton alloc] initWithFrame:NSZeroRect];
+	[b->button setTitle:toNSString("")];
+	[b->button setButtonType:NSMomentaryPushInButton];
+    
+    NSString* s = [[NSString alloc] initWithUTF8String:image_path];
+    NSImage* img = [[NSImage alloc] initByReferencingFile:s];
+    // printf("%s\n", s.cString);
+    // [img initByReferencingFile:s];
+    [b->button setImage:img];
+	[b->button setBordered:NO];
+	// [b->button setBezelStyle:NSRoundedBezelStyle];
+	uiDarwinSetControlFont(b->button, NSRegularControlSize);
+
+	if (buttonDelegate == nil) {
+		buttonDelegate = [[buttonDelegateClass new] autorelease];
+		[delegates addObject:buttonDelegate];
+	}
+	[buttonDelegate registerButton:b];
+	uiButtonOnClicked(b, defaultOnClicked, NULL);
+
+	return b;
+}

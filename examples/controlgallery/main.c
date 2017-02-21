@@ -248,7 +248,8 @@ static uiControl *makeDataChoosersPage(void)
 	uiGridSetPadded(grid, 1);
 	uiBoxAppend(vbox, uiControl(grid), 0);
 
-	button = uiNewButton("Open File");
+	// button = uiNewButton("Open File");
+    button = uiNewButtonWithImage("/Users/Seanlth/Desktop/img.png");
 	entry = uiNewEntry();
 	uiEntrySetReadOnly(entry, 1);
 	uiButtonOnClicked(button, onOpenFileClicked, entry);
@@ -309,6 +310,7 @@ int main(void)
 	uiOnShouldQuit(onShouldQuit, mainwin);
     
     uiWindowSetBorderless(mainwin, 1);
+    uiWindowSetBgColour(mainwin, 0.3, 0.3, 0.3, 1.0);
 
 	tab = uiNewTab();
 	uiWindowSetChild(mainwin, uiControl(tab));
